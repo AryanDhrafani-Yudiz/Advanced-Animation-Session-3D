@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -8,7 +7,6 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float attackRate = 2f;
     private float nextAttackTime = 0f;
     private bool IsGrounded;
-    private RaycastHit raycastHit;
     [SerializeField] private LayerMask layerMask;
 
     void Start()
@@ -17,19 +15,13 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //CheckForGrounded();
-        IsGrounded = Physics.SphereCast(new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), 1f, Vector3.down, out raycastHit, 10f); // To Check If Player Can Jump Or Not Based On Is He/She On Ground
+        CheckForGrounded();
     }
     private void CheckForGrounded()
     {
-        Collider[] groundColliders = Physics.OverlapSphere(transform.position, 1f, layerMask);
-        if (groundColliders != null) IsGrounded = true;
+        Collider[] groundColliders = Physics.OverlapSphere(transform.position, 0.07f, layerMask);
+        if (groundColliders.Length != 0) IsGrounded = true;
         else IsGrounded = false;
-        //foreach (Collider ground in groundColliders)
-        //{
-        //    if (ground != null) IsGrounded = true;
-        //    else IsGrounded = false;
-        //}
     }
     void Update()
     {
@@ -54,7 +46,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (IsGrounded)
         {
-            Debug.Log("Can Jump");
             if (Input.GetButtonDown("Jump"))
             {
                 animator.SetTrigger("Jump");
