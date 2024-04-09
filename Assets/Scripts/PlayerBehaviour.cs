@@ -9,6 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool IsGrounded;
     [SerializeField] private LayerMask layerMask;
 
+    public float RotateSpeed = 30f;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -31,8 +32,8 @@ public class PlayerBehaviour : MonoBehaviour
         animator.SetFloat("Forward", Input.GetAxis("Vertical"));
         animator.SetFloat("Strafe", Input.GetAxis("Horizontal"));
 
-        // Left Or Right Punch
-        if (Time.time >= nextAttackTime)
+
+        if (Time.time >= nextAttackTime)    // Left Or Right Punch
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -44,7 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
             nextAttackTime = Time.time + 1f / attackRate;
         }
-        if (IsGrounded)
+        if (IsGrounded) // If Player Is Grounded Than Only Allow Jump   
         {
             if (Input.GetButtonDown("Jump"))
             {
