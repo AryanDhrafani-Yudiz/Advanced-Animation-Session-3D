@@ -32,24 +32,39 @@ public class PlayerBehaviour : MonoBehaviour
         animator.SetFloat("Forward", Input.GetAxis("Vertical"));
         animator.SetFloat("Strafe", Input.GetAxis("Horizontal"));
 
+        #region Bug
+        //if (Time.time >= nextAttackTime)    // Left Or Right Punch
+        //{
+        //    Debug.Log("Can Attack");
+        //    if (Input.GetButtonDown("Fire1"))
+        //    {
+        //        Debug.Log("Left Punch");
+        //        animator.SetTrigger("LeftPunch");
+        //    }
+        //    else if (Input.GetButtonDown("Fire2"))
+        //    {
+        //        Debug.Log("Right Punch");
+        //        animator.SetTrigger("RightPunch");
+        //    }
+        //    nextAttackTime = Time.time + 1f / attackRate;
+        //    Debug.Log(Time.time);
+        //    Debug.Log(nextAttackTime);
+        //}
+        #endregion
 
-        if (Time.time >= nextAttackTime)    // Left Or Right Punch
+        if (IsGrounded) // If Player Is Grounded Than Only Allow Jump   
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Jump"))
+            {
+                animator.SetTrigger("Jump");
+            }
+            else if (Input.GetButtonDown("Fire1"))
             {
                 animator.SetTrigger("LeftPunch");
             }
             else if (Input.GetButtonDown("Fire2"))
             {
                 animator.SetTrigger("RightPunch");
-            }
-            nextAttackTime = Time.time + 1f / attackRate;
-        }
-        if (IsGrounded) // If Player Is Grounded Than Only Allow Jump   
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                animator.SetTrigger("Jump");
             }
         }
     }
