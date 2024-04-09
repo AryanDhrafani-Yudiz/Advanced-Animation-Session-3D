@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 976410000}
+  sensitivity: -1
 --- !u!1001 &976409996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -531,6 +532,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  attackRate: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &976410000 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 00b707a09d0fa46d99477877d8e4fe62, type: 3}
